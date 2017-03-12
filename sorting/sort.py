@@ -39,3 +39,33 @@ def sorted_insertion_3(iterable):
         result[j] = t
 
     return result
+
+
+def sorted_quick_1(iterable):
+    """
+    QuickSort 1 from Programming Pearls by Jon Bentley
+    :param iterable: list of items
+    :return: new list containing all items from the iterable in ascending order
+    """
+    result = copy(iterable)
+    _qsort(result, 0, len(result)-1)
+    return result
+
+
+def _qsort(iterable, lower, upper):
+    if lower >= upper:
+        # At most one element; do nothing
+        return
+    m = lower
+    for i in range(lower + 1, upper+1):
+        # invariant:
+        # iterable[lower+1,..., m] < iterable[lower] &&
+        # iterable[m+1,..., i-1] >= iterable[l]
+        if iterable[i] < iterable[lower]:
+            m += 1
+            iterable[m], iterable[i] = iterable[i], iterable[m]
+    iterable[m], iterable[lower] = iterable[lower], iterable[m]
+    # iterable[lower,...,m-1] < iterable[m] <= iterable[m+1,...,upper]
+    _qsort(iterable, lower, m-1)
+    _qsort(iterable, m+1, upper)
+

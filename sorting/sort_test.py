@@ -27,6 +27,16 @@ class SortedInsertion3Test(unittest.TestCase):
         time_complexity_factor(sort.sorted_insertion_3)
 
 
+class SortedQuick1Test(unittest.TestCase):
+    def test_example(self):
+        xs = [3, 1, 4, 2]
+        sorted_xs = sort.sorted_quick_1(xs)
+        self.assertEqual(sorted(xs), sorted_xs)
+
+    def test_time_complexity(self):
+        time_complexity_factor(sort.sorted_quick_1)
+
+
 def time_complexity_factor(sort_function):
     num = 1000
     data = [
