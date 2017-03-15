@@ -55,6 +55,21 @@ class SortedQuick2Test(unittest.TestCase):
         xs = [42] * 42
         time_complexity_factor(sort.sorted_quick_2, n2, iterable=xs)
 
+
+class SortedQuick3Test(unittest.TestCase):
+    def test_example(self):
+        xs = [3, 1, 4, 2]
+        sorted_xs = sort.sorted_quick_3(xs)
+        self.assertEqual(sorted(xs), sorted_xs)
+
+    def test_time_complexity(self):
+        time_complexity_factor(sort.sorted_quick_3, n2)
+
+    def test_time_complexity_identical_inputs(self):
+        xs = [42] * 42
+        time_complexity_factor(sort.sorted_quick_3, n2, iterable=xs)
+
+
 def time_complexity_factor(sort_function, time_complexity_func, iterable=None):
     num = 1000
     data = [

@@ -60,7 +60,7 @@ def _qsort_1(iterable, lower, upper):
     for i in range(lower + 1, upper+1):
         # invariant:
         # iterable[lower+1,..., m] < iterable[lower] &&
-        # iterable[m+1,..., i-1] >= iterable[l]
+        # iterable[m+1,..., i-1] >= iterable[lower]
         if iterable[i] < iterable[lower]:
             m += 1
             iterable[m], iterable[i] = iterable[i], iterable[m]
@@ -88,12 +88,54 @@ def _qsort_2(iterable, lower, upper):
     m = upper + 1
     for i in reversed(range(lower, upper+1)):
         # invariant:
-        # TODO(rheineke): Change invariants
-        # iterable[lower+1,..., m] < iterable[lower] &&
-        # iterable[m+1,..., i-1] >= iterable[l]
+        # TODO(rheineke): Verify invariants
+        # iterable[i+1,..., upper] >= iterable[m]
         if iterable[i] >= iterable[lower]:
             m -= 1
             iterable[m], iterable[i] = iterable[i], iterable[m]
     # iterable[lower,...,m-1] < iterable[m] <= iterable[m+1,...,upper]
     _qsort_2(iterable, lower, m - 1)
     _qsort_2(iterable, m + 1, upper)
+
+
+def sorted_quick_3(iterable):
+    """
+    QuickSort 3 from Programming Pearls by Jon Bentley
+    :param iterable: list of items
+    :return: new list containing all items from the iterable in ascending order
+    """
+    result = copy(iterable)
+    _qsort_3(result, 0, len(result) - 1)
+    return result
+
+
+def _qsort_3(iterable, lower, upper):
+    if lower >= upper:
+        # At most one element; do nothing
+        return
+    t = iterable[lower]
+    i = lower
+    j = upper + 1
+    while i < j:
+
+        while True:  # do while equivalent
+            i += 1
+            print('i={}, upper={}, {} < {}'.format(i, upper, iterable[i], t))
+            if i <= upper and iterable[i] < t:
+                break
+
+        while True:  # do while equivalent
+            j -= 1
+            print('j: {}'.format(j))
+            if iterable[j] > t:
+                break
+
+        if i > j:
+            break
+
+        iterable[i], iterable[j] = iterable[j], iterable[i]
+        print(i, j)
+    iterable[lower], iterable[j] = iterable[j], iterable[lower]
+    # iterable[lower,...,m-1] < iterable[m] <= iterable[m+1,...,upper]
+    _qsort_3(iterable, lower, j - 1)
+    _qsort_3(iterable, j + 1, upper)
