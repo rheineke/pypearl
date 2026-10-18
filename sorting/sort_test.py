@@ -1,9 +1,9 @@
 import math
 import time
 import unittest
+from copy import copy
 
 import pandas as pd
-from copy import copy
 
 from sorting import sort
 
@@ -76,10 +76,7 @@ class SortedQuick3Test(unittest.TestCase):
 
 def time_complexity_factor(sort_function, time_complexity_func, iterable=None):
     num = 1000
-    data = [
-        ('time', [0.] * num),
-        ('n', [0] * num)
-    ]
+    data = [("time", [0.0] * num), ("n", [0] * num)]
     df = pd.DataFrame(dict(data))
     for i in range(num):
         if iterable is None:
@@ -92,12 +89,12 @@ def time_complexity_factor(sort_function, time_complexity_func, iterable=None):
         df.loc[i] = [end - start, len(sorted_xs)]
     kwargs = dict(time_complexity_function=time_complexity_func)
     factor_srs = df.apply(_nanosecond_factor, axis=1, **kwargs)
-    fmt = '{} Run time: {:.1f}n^2 nanoseconds'
+    fmt = "{} Run time: {:.1f}n^2 nanoseconds"
     print(fmt.format(str(sort_function.__name__), factor_srs.mean()))
 
 
 def _nanosecond_factor(srs, time_complexity_function):
-    return srs['time'] * math.pow(10, 9) / time_complexity_function(srs['n'])
+    return srs["time"] * math.pow(10, 9) / time_complexity_function(srs["n"])
 
 
 def n2(num_items):

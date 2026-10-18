@@ -14,10 +14,10 @@ def sorted_insertion_1(iterable):
     """
     result = copy(iterable)
     for i in range(len(result)):
-        for j in reversed(range(1, i+1)):
-            if result[j-1] < result[j]:
+        for j in reversed(range(1, i + 1)):
+            if result[j - 1] < result[j]:
                 break
-            result[j-1], result[j] = result[j], result[j-1]
+            result[j - 1], result[j] = result[j], result[j - 1]
 
     return result
 
@@ -32,10 +32,10 @@ def sorted_insertion_3(iterable):
     for i in range(len(result)):
         t = result[i]
         j = i
-        for j in reversed(range(0, i+1)):
-            if result[j-1] < t:
+        for j in reversed(range(0, i + 1)):
+            if result[j - 1] < t:
                 break
-            result[j] = result[j-1]
+            result[j] = result[j - 1]
         result[j] = t
 
     return result
@@ -57,7 +57,7 @@ def _qsort_1(iterable, lower, upper):
         # At most one element; do nothing
         return
     m = lower
-    for i in range(lower + 1, upper+1):
+    for i in range(lower + 1, upper + 1):
         # invariant:
         # iterable[lower+1,..., m] < iterable[lower] &&
         # iterable[m+1,..., i-1] >= iterable[lower]
@@ -86,7 +86,7 @@ def _qsort_2(iterable, lower, upper):
         # At most one element; do nothing
         return
     m = upper + 1
-    for i in reversed(range(lower, upper+1)):
+    for i in reversed(range(lower, upper + 1)):
         # invariant:
         # TODO(rheineke): Verify invariants
         # iterable[i+1,..., upper] >= iterable[m]
@@ -117,16 +117,15 @@ def _qsort_3(iterable, lower, upper):
     i = lower
     j = upper + 1
     while i < j:
-
         while True:  # do while equivalent
             i += 1
-            print('i={}, upper={}, {} < {}'.format(i, upper, iterable[i], t))
+            print(f"i={i}, upper={upper}, {iterable[i]} < {t}")
             if i <= upper and iterable[i] < t:
                 break
 
         while True:  # do while equivalent
             j -= 1
-            print('j: {}'.format(j))
+            print(f"j: {j}")
             if iterable[j] > t:
                 break
 
