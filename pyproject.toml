@@ -1,0 +1,33 @@
+[project]
+name = "pypearl"
+version = "0.1.0"
+description = "Python solutions to Programming Pearls by Jon Bentley"
+readme = "README.md"
+requires-python = ">=3.14.8"
+dependencies = [
+    "pandas>=3.0",
+]
+
+[project.optional-dependencies]
+dev = ["ipdb", "mypy", "ruff"]
+test = ["pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sorting"]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+python_files = ["*_test.py"]
